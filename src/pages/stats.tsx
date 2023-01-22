@@ -1,12 +1,17 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import type { GetServerSidePropsContext, NextPage } from "next";
-import { getSession } from "next-auth/react";
+import { getSession, useSession } from "next-auth/react";
 
 const stats: NextPage = () => {
-  return (
-    <main className="flex h-screen flex-col items-center justify-center gap-8 bg-danube-200 ">
-      <h1 className="text">stats</h1>
-    </main>
-  );
+  const { data: session } = useSession();
+
+  if (session)
+    return (
+      <main className="flex h-screen flex-col items-center justify-center gap-8 bg-danube-200 ">
+        <h1 className="text">stats</h1>
+      </main>
+    );
+  return <p>Must be signed in</p>;
 };
 
 export const getServerSideProps = async (
