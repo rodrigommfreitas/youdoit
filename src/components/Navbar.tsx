@@ -38,17 +38,12 @@ export const Navbar: FC = () => {
         </nav>
 
         {session ? (
-          <div className="flex h-fit w-fit gap-6 text-danube-900">
-            <button className="transition hover:text-danube-900/75">
-              <SettingsIcon height="1.25em" width="1.25em" />
-            </button>
-            <button
-              onClick={() => signOut()}
-              className="transition hover:text-danube-900/75"
-            >
-              <LogoutIcon height="1.25em" width="1.25em" />
-            </button>
-          </div>
+          <button
+            onClick={() => signOut()}
+            className="text-danube-900 transition hover:text-danube-900/75"
+          >
+            <LogoutIcon height="1.25em" width="1.25em" />
+          </button>
         ) : (
           <button
             onClick={() => signIn("google")}
