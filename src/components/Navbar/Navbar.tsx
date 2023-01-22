@@ -16,8 +16,9 @@ export const Navbar: FC = () => {
             href={session ? "/tasks" : "/"}
             className="bg-gradient-to-r from-danube-900 to-danube-600 bg-clip-text text-2xl font-black text-transparent"
           >
-            JUST DO IT
+            YouDoIt
           </Link>
+
           {session && (
             <div className="ml-6 flex gap-6 font-medium text-danube-900">
               <Link href="/tasks">Tasks</Link>
@@ -25,6 +26,7 @@ export const Navbar: FC = () => {
             </div>
           )}
         </nav>
+
         {session ? (
           <div className="flex h-fit w-fit gap-6 text-danube-900">
             <button>
