@@ -3,7 +3,6 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import type { FC } from "react";
 import LogoutIcon from "./Icons/LogoutIcon";
-import SettingsIcon from "./Icons/SettingsIcon";
 
 export const Navbar: FC = () => {
   const { data: session } = useSession();
