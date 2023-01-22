@@ -1,4 +1,5 @@
-import type { NextPage } from "next";
+import type { GetServerSidePropsContext, NextPage } from "next";
+import { getSession } from "next-auth/react";
 
 const settings: NextPage = () => {
   return (
@@ -6,6 +7,26 @@ const settings: NextPage = () => {
       <h1 className="text">settings</h1>
     </main>
   );
+};
+export const getServerSideProps = async (
+  context: GetServerSidePropsContext
+) => {
+  const session = await getSession(context);
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {
+      session,
+    },
+  };
 };
 
 export default settings;
