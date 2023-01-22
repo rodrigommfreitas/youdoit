@@ -16,11 +16,11 @@ const Home: NextPage = () => {
       </Head>
 
       <main className="flex h-screen flex-col items-center justify-center bg-gradient-to-b from-danube-200 to-danube-600 text-center">
-        <h1 className="bg-gradient-to-t from-danube-900 via-danube-700 to-violet-800 bg-clip-text text-9xl font-black text-transparent">
+        <h1 className="bg-gradient-to-t from-danube-900 via-danube-700 to-violet-800 bg-clip-text text-6xl font-black text-transparent underline sm:text-7xl md:text-8xl lg:text-9xl">
           YouDoIt
         </h1>
 
-        <h2 className="mt-12 mb-16 max-w-7xl text-8xl font-black text-danube-800">
+        <h2 className="my-16 max-w-md text-5xl font-black text-danube-800 sm:max-w-xl sm:text-6xl md:max-w-2xl md:text-7xl lg:max-w-4xl lg:text-8xl xl:max-w-7xl">
           Keep track of your <span className="text-blue-600">tasks </span>
           <em className="bg-gradient-to-r from-danube-800 to-violet-700 bg-clip-text text-transparent">
             and get things done
