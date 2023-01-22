@@ -1,12 +1,12 @@
 import type { FC } from "react";
-import { IconProps } from "../../types/icon";
+import type { IconProps } from "../../types/icon";
 
 const SettingsIcon: FC<IconProps> = ({ height = "1em", width = "1em" }) => {
   return (
     <svg
       stroke="currentColor"
       fill="none"
-      stroke-width="2"
+      strokeWidth="2"
       viewBox="0 0 24 24"
       stroke-linecap="round"
       stroke-linejoin="round"
