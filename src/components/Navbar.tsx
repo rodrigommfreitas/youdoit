@@ -21,25 +21,38 @@ export const Navbar: FC = () => {
 
           {session && (
             <div className="ml-6 flex gap-6 font-medium text-danube-900">
-              <Link href="/tasks">Tasks</Link>
-              <Link href="/stats">Stats</Link>
+              <Link
+                href="/tasks"
+                className="transition hover:text-danube-900/75"
+              >
+                Tasks
+              </Link>
+              <Link
+                href="/stats"
+                className="transition hover:text-danube-900/75"
+              >
+                Stats
+              </Link>
             </div>
           )}
         </nav>
 
         {session ? (
           <div className="flex h-fit w-fit gap-6 text-danube-900">
-            <button>
+            <button className="transition hover:text-danube-900/75">
               <SettingsIcon height="1.25em" width="1.25em" />
             </button>
-            <button onClick={() => signOut()}>
+            <button
+              onClick={() => signOut()}
+              className="transition hover:text-danube-900/75"
+            >
               <LogoutIcon height="1.25em" width="1.25em" />
             </button>
           </div>
         ) : (
           <button
             onClick={() => signIn("google")}
-            className="bg-gradient-to-l from-danube-900 to-danube-600 bg-clip-text font-semibold text-transparent"
+            className=" bg-gradient-to-l from-danube-900 to-danube-600 bg-clip-text font-semibold text-transparent"
           >
             Sign In
           </button>
