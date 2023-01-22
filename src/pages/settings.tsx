@@ -8,6 +8,7 @@ const settings: NextPage = () => {
     </main>
   );
 };
+
 export const getServerSideProps = async (
   context: GetServerSidePropsContext
 ) => {
