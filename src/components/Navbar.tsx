@@ -19,20 +19,12 @@ export const Navbar: FC = () => {
           </Link>
 
           {session && (
-            <div className="ml-6 flex gap-6 font-medium text-danube-900">
-              <Link
-                href="/tasks"
-                className="transition hover:text-danube-900/75"
-              >
-                Tasks
-              </Link>
-              <Link
-                href="/stats"
-                className="transition hover:text-danube-900/75"
-              >
-                Stats
-              </Link>
-            </div>
+            <Link
+              href="/tasks"
+              className="ml-6 font-medium text-danube-900 transition hover:text-danube-900/75"
+            >
+              Tasks
+            </Link>
           )}
         </nav>
 
