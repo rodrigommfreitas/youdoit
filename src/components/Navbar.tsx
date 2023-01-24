@@ -38,7 +38,7 @@ export const Navbar: FC = () => {
         ) : (
           <button
             onClick={() => signIn("google")}
-            className=" bg-gradient-to-l from-danube-900 to-danube-600 bg-clip-text font-semibold text-transparent"
+            className="bg-gradient-to-l from-danube-900 to-danube-600 bg-clip-text font-semibold text-transparent"
           >
             Sign In
           </button>
