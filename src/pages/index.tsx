@@ -4,8 +4,6 @@ import Head from "next/head";
 import { getSession, signIn } from "next-auth/react";
 import SigninIcon from "../components/Icons/SigninIcon";
 
-// <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16 "></div>
-
 const Home: NextPage = () => {
   return (
     <>
@@ -38,7 +36,6 @@ const Home: NextPage = () => {
   );
 };
 
-/*
 export const getServerSideProps = async (
   context: GetServerSidePropsContext
 ) => {
@@ -59,5 +56,5 @@ export const getServerSideProps = async (
     },
   };
 };
-*/
+
 export default Home;
