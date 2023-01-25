@@ -8,8 +8,8 @@ const LogoutIcon: FC<IconProps> = ({ height = "1em", width = "1em" }) => {
       fill="none"
       strokeWidth="2"
       viewBox="0 0 24 24"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeLinecap="round"
+      strokeLinejoin="round"
       height={height}
       width={width}
       xmlns="http://www.w3.org/2000/svg"
