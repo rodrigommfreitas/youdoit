@@ -1,12 +1,30 @@
 /* eslint-disable react-hooks/rules-of-hooks */
+import type { Task } from "@prisma/client";
 import type { GetServerSidePropsContext, NextPage } from "next";
 import { getSession, useSession } from "next-auth/react";
 import Head from "next/head";
+import { useState } from "react";
+import NewTaskModal from "../components/NewTaskModal";
+import TasksItem from "../components/TasksItem";
+import { api } from "../utils/api";
 
 const tasks: NextPage = () => {
   const { data: session } = useSession();
+  const [tasks, setTasks] = useState<Task[]>([]);
+  const [completedTasks, setCompletedTasks] = useState<Task[]>([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  if (session)
+  const { data: tasksData, isLoading } = api.task.getTasks.useQuery(undefined, {
+    onSuccess(tasks: Task[]) {
+      setTasks(tasks);
+      const completed = tasks.filter((item) => item.completed);
+      setCompletedTasks(completed);
+    },
+  });
+
+  const toggleModal = () => setIsModalOpen(!isModalOpen);
+
+  if (session) {
     return (
       <>
         <Head>
@@ -15,22 +33,38 @@ const tasks: NextPage = () => {
           <link rel="icon" href="/favicon.ico" />
         </Head>
 
+        {isModalOpen && (
+          <NewTaskModal toggleModal={toggleModal} setTasks={setTasks} />
+        )}
+
         <main className="flex h-screen flex-col items-center justify-center gap-8 bg-danube-200">
           <div className="mt-8 h-4/5 w-4/5 max-w-5xl rounded-xl bg-white px-6 pt-4 pb-8 shadow-lg shadow-black/50 xl:mt-0">
             <div className="flex h-10 items-center justify-between">
               <h1 className="text-2xl font-bold text-danube-900">Your tasks</h1>
-              <button className="rounded-lg bg-danube-500 px-6 py-2 font-semibold text-white transition hover:bg-danube-600">
+              <button
+                onClick={toggleModal}
+                className="rounded-lg bg-danube-500 px-6 py-2 font-semibold text-white transition hover:bg-danube-600 active:bg-danube-700"
+              >
                 Add task
               </button>
             </div>
-            <ul className="mt-10 flex h-5/6 w-full flex-col gap-2 overflow-x-hidden overflow-y-scroll px-4 text-lg font-medium">
-              <li>Learn Next</li>
-              <li>Learn Next</li>
-            </ul>
+
+            {!tasksData || isLoading ? (
+              <p className="absolute inset-0 flex items-center justify-center">
+                Loading tasks...
+              </p>
+            ) : (
+              <ul className="mt-10 flex h-5/6 w-full flex-col gap-2 overflow-x-hidden overflow-y-scroll px-4 text-lg font-medium">
+                {tasks.map((task) => (
+                  <TasksItem key={task.id} task={task} />
+                ))}
+              </ul>
+            )}
           </div>
         </main>
       </>
     );
+  }
   return <p>Must be signed in</p>;
 };
 
