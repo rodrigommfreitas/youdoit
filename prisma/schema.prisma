@@ -63,7 +63,6 @@ model VerificationToken {
 model Task {
     id        String   @id @default(cuid())
     title     String
-    note      String?
     important Boolean  @default(false)
     completed Boolean  @default(false)
     createdAt DateTime @default(now())
