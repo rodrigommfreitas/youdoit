@@ -35,46 +35,19 @@ export const taskRouter = createTRPCRouter({
       );
     }
   }),
-  // Toggle a task's important status
-  toggleImportant: protectedProcedure
+  // Complete task
+  completeTask: protectedProcedure
     .input(
       z.object({
         id: z.string(),
+        isCompleted: z.boolean(),
       })
     )
     .mutation(async ({ input, ctx }) => {
       try {
-        const task = await ctx.prisma.task.findUnique({
-          where: { id: input.id },
-        });
-        const newTask = await ctx.prisma.task.update({
-          where: { id: input.id },
-          data: { important: !task?.important },
-        });
-        return newTask;
-      } catch (err) {
-        console.log(
-          `It wasn't possible to toggle the task's important status...\n ${
-            err as string
-          }`
-        );
-      }
-    }),
-  // Toggle a task's completed status
-  toggleCompleted: protectedProcedure
-    .input(
-      z.object({
-        id: z.string(),
-      })
-    )
-    .mutation(async ({ input, ctx }) => {
-      try {
-        const task = await ctx.prisma.task.findUnique({
-          where: { id: input.id },
-        });
         const item = await ctx.prisma.task.update({
           where: { id: input.id },
-          data: { completed: !task?.completed },
+          data: { completed: input.isCompleted },
         });
         return item;
       } catch (err) {
