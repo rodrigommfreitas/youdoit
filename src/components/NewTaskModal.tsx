@@ -58,8 +58,8 @@ const NewTaskModal: FC<Props> = ({ toggleModal, setTasks }) => {
   };
 
   return (
-    <div className="absolute inset-0 flex items-center justify-center bg-black/75">
-      <div ref={ref} className="w-80 rounded-xl bg-white p-6 shadow-lg">
+    <div className="absolute inset-0 z-10 flex items-center justify-center bg-black/75">
+      <div ref={ref} className="z-10 w-80 rounded-xl bg-white p-6 shadow-lg">
         <div className="flex items-center justify-between">
           <h1 className="text-2xl font-bold text-danube-900">Add a new task</h1>
           <button
