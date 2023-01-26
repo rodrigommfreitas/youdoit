@@ -43,16 +43,20 @@ const tasks: NextPage = () => {
               <h1 className="text-2xl font-bold text-danube-900">Your tasks</h1>
               <button
                 onClick={toggleModal}
-                className="rounded-lg bg-danube-500 px-6 py-2 font-semibold text-white transition hover:bg-danube-600 active:bg-danube-700"
+                className="z-10 rounded-lg bg-danube-500 px-6 py-2 font-semibold text-white transition hover:bg-danube-600 active:bg-danube-700"
               >
                 Add task
               </button>
             </div>
 
             {!tasksData || isLoading ? (
-              <p className="absolute inset-0 flex items-center justify-center">
+              <h1 className="absolute inset-0 flex items-center justify-center text-xl">
                 Loading tasks...
-              </p>
+              </h1>
+            ) : tasks.length === 0 ? (
+              <h1 className="absolute inset-0 flex items-center justify-center text-xl">
+                Your task list is empty.
+              </h1>
             ) : (
               <ul className="mt-10 flex h-5/6 w-full flex-col gap-2 overflow-x-hidden overflow-y-scroll px-4 text-lg font-medium">
                 {tasks.map((task) => (
