@@ -43,7 +43,9 @@ const tasks: NextPage = () => {
               <h1 className="text-2xl font-bold text-danube-900">Your tasks</h1>
               <button
                 onClick={toggleModal}
-                className="z-10 rounded-lg bg-danube-500 px-6 py-2 font-semibold text-white transition hover:bg-danube-600 active:bg-danube-700"
+                className={`${
+                  !isModalOpen ? "z-10" : "z-0"
+                } rounded-lg bg-danube-500 px-6 py-2 font-semibold text-white transition hover:bg-danube-600 active:bg-danube-700`}
               >
                 Add task
               </button>
