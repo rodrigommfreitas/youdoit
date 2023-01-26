@@ -62,7 +62,13 @@ const tasks: NextPage = () => {
             ) : (
               <ul className="mt-10 flex h-5/6 w-full flex-col gap-2 overflow-x-hidden overflow-y-scroll px-4 text-lg font-medium">
                 {tasks.map((task) => (
-                  <TasksItem key={task.id} task={task} />
+                  <TasksItem
+                    key={task.id}
+                    task={task}
+                    setTasks={setTasks}
+                    completedTasks={completedTasks}
+                    setCompletedTasks={setCompletedTasks}
+                  />
                 ))}
               </ul>
             )}
