@@ -9,7 +9,7 @@ export const taskRouter = createTRPCRouter({
         title: z
           .string()
           .min(1, { message: "Field can't be empty." })
-          .max(30, { message: "Maximum characters exceeded." }),
+          .max(100, { message: "Maximum characters exceeded." }),
         important: z.boolean(),
         user: z.object({ connect: z.object({ id: z.string() }) }),
       })
