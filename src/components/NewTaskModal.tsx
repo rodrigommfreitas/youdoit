@@ -52,6 +52,7 @@ const NewTaskModal: FC<Props> = ({ toggleModal, setTasks }) => {
           },
         },
       });
+      toggleModal();
     } catch (error) {
       console.log(error);
     }
