@@ -13,6 +13,9 @@ const tasks: NextPage = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [completedTasks, setCompletedTasks] = useState<Task[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [sort, setSort] = useState<"completed" | "importance" | "recent">(
+    "completed"
+  );
 
   const { data: tasksData, isLoading } = api.task.getTasks.useQuery(undefined, {
     onSuccess(tasks: Task[]) {
@@ -37,18 +40,50 @@ const tasks: NextPage = () => {
           <NewTaskModal toggleModal={toggleModal} setTasks={setTasks} />
         )}
 
-        <main className="flex h-screen flex-col items-center justify-center gap-8 bg-danube-200">
-          <div className="mt-8 h-4/5 w-4/5 max-w-5xl rounded-xl bg-white px-6 pt-4 pb-8 shadow-lg shadow-black/50 xl:mt-0">
+        <main className="flex h-fit min-h-screen flex-col items-center justify-center gap-8 bg-danube-200 py-8">
+          <div className="min:h-5/6 mt-8 h-fit w-4/5 max-w-5xl rounded-xl bg-white px-4 pt-4 pb-8 shadow-lg shadow-black/50 sm:px-6 xl:mt-0">
             <div className="flex h-10 items-center justify-between">
-              <h1 className="text-2xl font-bold text-danube-900">Your tasks</h1>
+              <h1 className="text-xl font-bold text-danube-900 sm:text-2xl">
+                Your tasks
+              </h1>
               <button
                 onClick={toggleModal}
                 className={`${
                   !isModalOpen ? "z-10" : "z-0"
-                } rounded-lg bg-danube-500 px-6 py-2 font-semibold text-white transition hover:bg-danube-600 active:bg-danube-700`}
+                } rounded-lg bg-danube-500 px-4 py-2 font-semibold text-white transition hover:bg-danube-600 active:bg-danube-700 sm:px-6`}
               >
                 Add task
               </button>
+            </div>
+
+            <div className="mt-4 flex gap-1 px-1 text-sm sm:text-lg">
+              <span className="font-bold text-danube-800">Sort by: </span>
+              <div className="flex items-center gap-1 font-medium text-danube-600">
+                <button
+                  onClick={() => setSort("completed")}
+                  className={
+                    sort === "completed" ? "font-semibold text-danube-900" : ""
+                  }
+                >
+                  completed
+                </button>
+                <button
+                  onClick={() => setSort("importance")}
+                  className={
+                    sort === "importance" ? "font-semibold text-danube-900" : ""
+                  }
+                >
+                  importance
+                </button>
+                <button
+                  onClick={() => setSort("recent")}
+                  className={
+                    sort === "recent" ? "font-semibold text-danube-900" : ""
+                  }
+                >
+                  recent
+                </button>
+              </div>
             </div>
 
             {!tasksData || isLoading ? (
@@ -59,18 +94,52 @@ const tasks: NextPage = () => {
               <h1 className="absolute inset-0 flex items-center justify-center text-xl">
                 Your task list is empty.
               </h1>
-            ) : (
-              <ul className="mt-10 flex h-5/6 w-full flex-col gap-2 overflow-x-hidden overflow-y-scroll px-4 text-lg font-medium">
-                {tasks.map((task) => (
-                  <TasksItem
-                    key={task.id}
-                    task={task}
-                    setTasks={setTasks}
-                    completedTasks={completedTasks}
-                    setCompletedTasks={setCompletedTasks}
-                  />
-                ))}
+            ) : sort === "completed" ? (
+              <ul className="mt-8 flex h-5/6 w-full flex-col gap-2 overflow-x-hidden overflow-y-scroll px-2 text-lg font-medium">
+                {tasks
+                  .sort((a, b) => Number(b.completed) - Number(a.completed))
+                  .map((task) => (
+                    <TasksItem
+                      key={task.id}
+                      task={task}
+                      setTasks={setTasks}
+                      completedTasks={completedTasks}
+                      setCompletedTasks={setCompletedTasks}
+                    />
+                  ))}
               </ul>
+            ) : sort === "importance" ? (
+              <ul className="mt-8 flex h-5/6 w-full flex-col gap-2 overflow-x-hidden overflow-y-scroll px-2 text-lg font-medium">
+                {tasks
+                  .sort((a, b) => Number(b.important) - Number(a.important))
+                  .map((task) => (
+                    <TasksItem
+                      key={task.id}
+                      task={task}
+                      setTasks={setTasks}
+                      completedTasks={completedTasks}
+                      setCompletedTasks={setCompletedTasks}
+                    />
+                  ))}
+              </ul>
+            ) : (
+              sort === "recent" && (
+                <ul className="mt-8 flex h-5/6 w-full flex-col gap-2 overflow-x-hidden overflow-y-scroll px-2 text-lg font-medium">
+                  {tasks
+                    .sort((a, b) => {
+                      return b.createdAt.getTime() - a.createdAt.getTime();
+                    })
+                    .map((task) => (
+                      <TasksItem
+                        key={task.id}
+                        task={task}
+                        setTasks={setTasks}
+                        completedTasks={completedTasks}
+                        setCompletedTasks={setCompletedTasks}
+                      />
+                    ))}
+                </ul>
+              )
             )}
           </div>
         </main>
