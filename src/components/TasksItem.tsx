@@ -35,7 +35,6 @@ const TasksItem: FC<Props> = ({
     <li className="flex items-center justify-between sm:text-xl">
       <div className="flex max-w-[175px] items-center gap-1 sm:max-w-none sm:gap-2">
         <span className="relative w-max text-danube-700">
-          {" "}
           <div className="pointer-events-none absolute inset-0 flex origin-left items-center justify-center">
             <motion.div
               initial={{ width: 0 }}
