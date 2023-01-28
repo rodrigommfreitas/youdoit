@@ -8,7 +8,7 @@ export const Navbar: FC = () => {
   const { data: session } = useSession();
 
   return (
-    <div className="fixed top-0 z-10 flex h-16 min-w-full items-center bg-opacity-0 px-6">
+    <div className="fixed top-0 z-20 flex h-16 min-w-full items-center bg-opacity-0 px-6">
       <div className="flex w-full items-center justify-between">
         <nav className="flex items-center">
           <Link
