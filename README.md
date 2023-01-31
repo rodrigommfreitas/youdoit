@@ -19,6 +19,10 @@
 ### Setup
 After creating your MySQL database (I used [PlanetScale](https://planetscale.com/)) and creating a google project with OAuth, setup your .env file following the structure found in .env.example.
 
+### Update db
+```
+npx prisma db push
+```
 ### Install dependencies
 ```
 npm install
